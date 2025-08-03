@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block head_title %}
+<title>Login | {{ title }}</title>
+{% endblock head_title %}
+
+{% block body %}
+<!-- Gradient background -->
+<div class="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-white flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+
+  <!-- Decorative blurred blobs -->
+  <div class="absolute -top-20 -left-40 w-96 h-96 bg-indigo-300 rounded-full opacity-20 blur-3xl z-0"></div>
+  <div class="absolute -bottom-24 -right-32 w-96 h-96 bg-purple-300 rounded-full opacity-20 blur-3xl z-0"></div>
+
+  <!-- Login Card -->
+  <div class="max-w-md w-full bg-white z-10 p-8 rounded-2xl shadow-2xl border border-gray-100 space-y-6">
+    
+    <!-- Header -->
+    <div class="text-center">
+      <img src="https://www.svgrepo.com/show/426943/login-circle.svg" alt="Login Icon" class="mx-auto h-16 w-16">
+      <h2 class="mt-4 text-2xl font-bold text-gray-800">Welcome Back 👋</h2>
+      <p class="text-sm text-gray-500">Login to access your dashboard</p>
+    </div>
+
+    <!-- Errors -->
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-2 rounded-md text-sm font-medium">
+          ⚠️ {{ error }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Form -->
+    <form method="post" class="space-y-5">
+      {% csrf_token %}
+      {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+      {% endfor %}
+
+      <!-- Username Field -->
+      <div>
+        <label for="{{ form.username.id_for_label }}" class="block text-gray-800 font-medium mb-1">Username</label>
+        {% render_field form.username class="border border-gray-300 rounded-md px-3 py-2 w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" %}
+        {% for error in form.username.errors %}
+          <p class="text-sm text-red-500 mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <label for="{{ form.password.id_for_label }}" class="block text-gray-800 font-medium mb-1">Password</label>
+        {% render_field form.password class="border border-gray-300 rounded-md px-3 py-2 w-full focus:ring-2 focus:ring-indigo-500 focus:outline-none" %}
+        {% for error in form.password.errors %}
+          <p class="text-sm text-red-500 mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg text-sm font-semibold transition shadow-md">
+        Log In
+      </button>
+    </form>
+
+    <!-- Optional Footer -->
+    <div class="text-center text-sm text-gray-500">
+      <p>Don’t have an account?
+        <a href="{% url 'signup' %}" class="text-indigo-600 hover:underline font-medium">Register</a>
+      </p>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

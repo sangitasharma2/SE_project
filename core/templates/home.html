@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}
+  <title>Bank - Management System</title>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="bg-gradient-to-tr from-blue-100 via-white to-purple-100 min-h-screen flex flex-col justify-between">
+  
+  <!-- HERO SECTION -->
+  <section class="flex flex-col-reverse lg:flex-row items-center px-8 lg:px-24 py-16 gap-10">
+    <div class="flex-1 text-center lg:text-left">
+      <h1 class="text-5xl font-bold text-blue-900 mb-6">Welcome to Samit's Bank Management System</h1>
+      <p class="text-gray-700 mb-6">
+        This platform is designed for internal bank operations. Employees can manage customer accounts, approve loans, handle transactions, generate reports, and more — all in one secure system.
+      </p>
+      {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}" class="bg-blue-900 text-white px-6 py-3 rounded-xl shadow hover:bg-white hover:text-blue-900 hover:border hover:border-blue-900 transition">Go to Profile</a>
+      {% else %}
+      <a href="{% url 'signin' %}" class="bg-blue-800 text-white px-6 py-3 rounded-xl shadow hover:bg-white hover:text-blue-900 hover:border hover:border-blue-900 transition">Login</a>
+        {% endif %}
+    </div>
+    <div class="flex-1">
+      <img src="{% static 'img/samit.jpg' %}" alt="Bank illustration" class="rounded-3xl w-full shadow-xl" />
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="bg-white py-16 px-6 md:px-20">
+    <h2 class="text-3xl font-bold text-center text-blue-900 mb-10">Key Functionalities</h2>
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <div class="p-6 bg-blue-50 rounded-2xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold mb-3">Account Management</h3>
+        <p class="text-gray-600">Create, update, and manage customer accounts with ease and efficiency.</p>
+      </div>
+      <div class="p-6 bg-blue-50 rounded-2xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold mb-3">Loan Processing</h3>
+        <p class="text-gray-600">Approve or reject loan applications, track EMIs, and analyze loan statistics.</p>
+      </div>
+      <div class="p-6 bg-blue-50 rounded-2xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold mb-3">Transaction Control</h3>
+        <p class="text-gray-600">Handle deposits, withdrawals, transfers, and audit transaction logs.</p>
+      </div>
+      <div class="p-6 bg-blue-50 rounded-2xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold mb-3">Reports & Analytics</h3>
+        <p class="text-gray-600">Generate daily, weekly, and monthly financial reports and visualize trends.</p>
+      </div>
+      <div class="p-6 bg-blue-50 rounded-2xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold mb-3">User Permissions</h3>
+        <p class="text-gray-600">Assign roles, manage staff logins, and ensure data access control.</p>
+      </div>
+      <div class="p-6 bg-blue-50 rounded-2xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-semibold mb-3">Notification System</h3>
+        <p class="text-gray-600">Get alerts on critical system activities and customer requests.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="text-center py-12 bg-gradient-to-r from-purple-100 via-blue-100 to-indigo-100">
+    <h2 class="text-3xl font-bold text-blue-900 mb-4">Ready to Manage the Bank Efficiently?</h2>
+    <p class="text-gray-700 mb-6">Access the admin dashboard to get started with account tasks, loan reviews, and more.</p>
+     {% if user.is_authenticated %}
+      <a href="{% url 'profile' %}" class="bg-blue-900 text-white px-8 py-3 rounded-full shadow hover:bg-white hover:text-blue-900 hover:border hover:border-blue-900 transition">Go to Profile</a>
+    {% else %}
+      <a href="{% url 'signin' %}" class="bg-blue-900 text-white px-8 py-3 rounded-full shadow hover:bg-white hover:text-blue-900 hover:border hover:border-blue-900 transition">LOG IN</a>
+    {% endif %}
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-blue-900 text-white py-6 px-4 text-sm flex flex-col md:flex-row justify-between items-center">
+    <div>&copy; 2025 Samit's Bank. All rights reserved.</div>
+    <div class="mt-2 md:mt-0">
+      <a href="#" class="hover:underline mx-2">Privacy Policy</a> |
+      <a href="#" class="hover:underline mx-2">Support</a> |
+      <a href="#" class="hover:underline mx-2">Admin Guide</a>
+    </div>
+  </footer>
+</div>
+{% endblock %}

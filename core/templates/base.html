@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  {% block head_title %}
+  <title>Bank System - By Raiyan</title>
+  {% endblock head_title %}
+</head>
+<body class="bg-slate-100 text-gray-800 min-h-screen flex flex-col">
+
+  {% include "navbar.html" %}
+
+  <main class="flex-1">
+    {% block body %}{% endblock body %}
+    {% include "message.html" %}
+  </main>
+
+  {% include "footer.html" %}
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    // Mobile nav toggle
+    const toggleBtn = document.getElementById('nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (toggleBtn && menu) {
+      toggleBtn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    }
+  </script>
+</body>
+</html>

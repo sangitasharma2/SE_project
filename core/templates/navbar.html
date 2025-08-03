@@ -1,0 +1,31 @@
+{% load humanize %}
+<nav class="bg-white shadow px-6 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="text-xl font-bold text-blue-900">
+      <a href="/">BMS</a>
+    </div>
+
+    <button id="nav-toggle" class="lg:hidden text-blue-900 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+
+    <div id="mobile-menu" class="hidden lg:flex space-x-4 items-center mt-4 lg:mt-0">
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'transaction_report' %}" class="text-sm hover:text-[#28A745]">Report</a>
+        <a href="{% url 'money_transfer' %}" class="text-sm hover:text-[#28A745]">Transfer</a>
+        <a href="{% url 'deposit' %}" class="text-sm hover:text-[#28A745]">Deposit</a>
+        <a href="{% url 'withdraw' %}" class="text-sm hover:text-[#28A745]">Withdraw</a>
+        <a href="{% url 'loan_request' %}" class="text-sm hover:text-[#28A745]">Loan Request</a>
+        <span class="text-sm font-medium">Welcome, {{ request.user.first_name }} (Balance: ${{ request.user.account.balance|floatformat:2|intcomma }})</span>
+        <a href="{% url 'profile' %}" class="bg-[#28A745] text-white px-4 py-2 rounded hover:bg-green-700 transition text-sm">Profile</a>
+        <a href="{% url 'logout' %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition text-sm">Logout</a>
+      {% else %}
+        <a href="{% url 'signin' %}" class="bg-blue-900 text-white px-4 py-2 rounded text-sm hover:bg-blue-800">Login</a>
+        <a href="{% url 'signup' %}" class="bg-white border border-blue-900 text-blue-900 px-4 py-2 rounded text-sm hover:bg-blue-900 hover:text-white">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
